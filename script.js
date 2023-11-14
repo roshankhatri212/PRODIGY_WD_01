@@ -1,23 +1,26 @@
+// script.js
 document.addEventListener('DOMContentLoaded', function() {
     var header = document.querySelector('header');
+    var contentContainer = document.getElementById('content');
 
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            header.style.backgroundColor = '#555';
-        } else {
-            header.style.backgroundColor = '#333';
-        }
-    });
+    function loadContent(route) {
+        var filePath = 'content/' + route.slice(1) + '.html';
 
-    var navLinks = document.querySelectorAll('nav a');
+        fetch(filePath)
+            .then(response => response.text())
+            .then(content => {
+                contentContainer.innerHTML = content;
+            })
+            .catch(error => {
+                console.error('Error loading content:', error);
+            });
+    }
 
-    navLinks.forEach(function(link) {
-        link.addEventListener('mouseover', function() {
-            this.style.color = '#3498db';
-        });
+    function handleNavigation() {
+        var route = window.location.hash || '#/section1';
+        loadContent(route);
+    }
 
-        link.addEventListener('mouseout', function() {
-            this.style.color = '#fff';
-        });
-    });
+    window.addEventListener('hashchange', handleNavigation);
+    handleNavigation(); // Load content on initial page load
 });

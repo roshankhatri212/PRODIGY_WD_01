@@ -1,3 +1,4 @@
+/* styles.css */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -29,6 +30,11 @@ nav a {
     padding: 10px 20px;
     margin: 0 10px;
     transition: color 0.3s ease;
+}
+
+/* Add hover effect for navigation links */
+nav a:hover {
+    color: #3498db;
 }
 
 section {
